@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lector QR & Google Sheets</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+
+  <div class="main-wrapper">
+    <!-- Navegación por Pestañas -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="tab-scanner">Lector QR</button>
+      <button class="tab-btn" data-tab="tab-sheets">Google Sheets</button>
+    </nav>
+
+    <!-- Pestaña 1: Lector QR -->
+    <main id="tab-scanner" class="tab-content active">
+      <div class="app-container">
+        <section class="scanner-section">
+          <div id="reader" style="width: 100%;"></div>
+        </section>
+
+        <section class="result-section">
+          <div class="result-box">
+            <label for="qr-result-text">Texto del QR</label>
+            <textarea id="qr-result-text" readonly placeholder="El texto leído aparecerá aquí..."></textarea>
+          </div>
+
+          <button id="copy-btn" class="btn-copy">COPIAR TEXTO</button>
+          <div id="sync-status" class="status-msg"></div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Pestaña 2: Configuración de Google Sheets -->
+    <section id="tab-sheets" class="tab-content hidden">
+      <div class="sheets-container">
+        
+        <!-- Campo accesión -->
+        <div class="sheets-row full-width">
+          <input type="text" id="accesion-input" placeholder="accesión">
+        </div>
+
+        <!-- Campo enlace de Google Sheets -->
+        <div class="sheets-row full-width">
+          <input type="url" id="sheet-url-input" placeholder="enlace de Google sheets">
+        </div>
+
+        <!-- Fila 1: CARGAR y Mensaje -->
+        <div class="sheets-row">
+          <button id="btn-cargar" class="btn-fixed">CARGAR</button>
+          <div id="status-carga" class="field-dynamic">----------</div>
+        </div>
+
+        <!-- Fila 2: VARIABLE y Desplegable -->
+        <div class="sheets-row">
+          <div class="label-fixed">VARIABLE</div>
+          <select id="select-variable" class="field-dynamic select-field">
+            <option value="">---------</option>
+          </select>
+        </div>
+
+        <!-- Fila 3: REPETICIÓN (Cambiado de <div> a <input>) -->
+        <div class="sheets-row">
+          <div class="label-fixed">REPETICIÓN</div>
+          <input type="text" id="val-repeticion" class="field-dynamic" placeholder="Ingresa texto...">
+        </div>
+
+        <!-- Fila 4: MEDICIÓN (Cambiado de <div> a <input>) -->
+        <div class="sheets-row">
+          <div class="label-fixed">MEDICIÓN</div>
+          <input type="text" id="val-medicion" class="field-dynamic" placeholder="Ingresa texto...">
+        </div>
+
+        <!-- Fila Inferior: GUARDAR -->
+        <div class="sheets-footer">
+          <button id="btn-guardar" class="btn-fixed">GUARDAR</button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Carga de scripts -->
+  <script src="js/sheets.js"></script>
+  <script src="js/qrScanner.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
